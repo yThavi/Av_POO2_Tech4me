@@ -96,23 +96,22 @@ public class AppProdutos {
                     voltarMenu(in);
                     continue;
                 }
-                System.out.println("Digite o codigo do produto desejado: ");
-                int escolha = in.nextInt();
-                in.nextLine();
-
-                for (Produto produto : produtos) {
-                    if(escolha == produto.getCodigoproduto()){
-                        System.out.println("Produto encontrado");
-                        System.out.println(produto);
-                        voltarMenu(in);
-                    }
-                    else {
-                        System.out.println("Produto não cadastrado com este código");
-                        voltarMenu(in);
-                    }
+                System.out.println("Digite o codigo do produto: ");
+                int cod = in.nextInt();
+                for (Produto produto : produtos){
+                if(cod != produto.getCodigoproduto()){
+                    System.out.println("Produto não encontrado!!!");
                 }
-               }
-                else if (opcao == 3) {
+            }
+            System.out.println("------------------------------");
+            produtos.stream().filter(s -> s.getCodigoproduto() == cod)
+                .forEach(s -> System.out.println("Codigo: " + s.getCodigoproduto() + " " + "Nome: " + s.getNome() + "\nQuantidade em estoque: " + s.getQtdEstoque() + " Preco: "+ s.getPreco()));
+            System.out.println("------------------------------");
+            in.nextLine();
+            voltarMenu(in);
+            continue;
+               
+            }else if (opcao == 3) {
 
                 if (produtos.size() == 0){
                     System.out.println("Não existem produtos a serem listados.");
